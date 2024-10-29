@@ -5,11 +5,11 @@ import Footer from "./Footer";
 
 function AppLayout() {
   return (
-    <>
+    <div className="container">
       <Navbar />
-      <Footer />
       <Outlet />
-    </>
+      <Footer />
+    </div>
   );
 }
 

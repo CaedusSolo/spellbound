@@ -2,7 +2,9 @@ import React from 'react'
 
 function SortingHomePage() {
   return (
-    <div>SortingHomePage</div>
+    <>
+        <h1 className="text-center">Discover Your House!</h1>
+    </>
   )
 }
 

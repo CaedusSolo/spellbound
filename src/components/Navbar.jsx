@@ -11,7 +11,7 @@ function Navbar() {
         <NavLink className={({isActive}) => isActive ? `nav-link active` : 'nav-link'} to="/" end>Home</NavLink>
         <NavLink className={({isActive}) => isActive ? `nav-link active` : 'nav-link'} to="sorting" >Find Your House</NavLink>
         <NavLink className={({isActive}) => isActive ? `nav-link active` : 'nav-link'}>Learn</NavLink>
-        <NavLink className={({isActive}) => isActive ? `nav-link active` : 'nav-link'}>Encyclopedia</NavLink>
+        
       </div>
     </nav>
   );
