@@ -1,8 +1,14 @@
-# React + Vite
+# About This Project
+This project, which I have named 'Spellbound' for the time being, is an interactive web app based on the Harry Potter universe and Rowling's Wizarding World. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#Tech Stack
+The project will use React JS for the frontend and Express JS for the backend.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Features
+I've planned a few features for now (more to come!) , they are:
+  1. Sort users into Houses
+  2. Allow users to customize their profile
+  3. Allow users to attend classes and take exams
+  4. Magical spellbook that lists the spells and their uses
+  5. Duelling mini-game
+  6. User authentication and save progress
