@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  color: azure;
 }
 
 #root {
@@ -9,7 +10,7 @@
   margin: 0 auto;
   padding: 0;
   min-height: 100vh;
-  background-image: linear-gradient(rgba(4,9,28,0.7), rgba(4,9,28,0.9)), url('./assets/home-bg.jpg');
+  background-image: linear-gradient(rgba(4,9,28,0.6), rgba(4,9,28,0.9)), url('./assets/home-bg.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,6 +24,16 @@
   justify-content: space-between;
   background-color: gainsboro;
   padding: 0.25em 0.5em;
+  color: #161616;
+}
+
+.nav-link.active {
+  text-decoration: underline;
+}
+
+.navbarLogo {
+  width: 8%;
+  height: 8%;
 }
 
 .footer {
@@ -37,6 +48,10 @@
   justify-content: center;
   align-items: center;
   padding-top: 1em;
+}
+
+.footer > p {
+  color: #161616;
 }
 
 .linksContainer {

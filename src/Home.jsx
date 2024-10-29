@@ -2,9 +2,9 @@ import "./App.css";
 
 function Home() {
   return (
-    <>
-      <h1>App Component Goes Here</h1>
-    </>
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <h1 className="text-center">Welcome to Spellbound 🪄</h1>
+    </div>
   );
 }
 

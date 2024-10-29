@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
 import AppLayout from "./components/AppLayout.jsx";
+import SortingHomePage from "./pages/sorting/SortingHomePage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -10,6 +11,7 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
+          <Route path="sorting" element={<SortingHomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
