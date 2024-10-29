@@ -6,10 +6,7 @@ import Footer from "./components/Footer"
 function App() {
   return (
     <>
-      <Navbar />
-      <h1>App Component</h1>
-      <Footer />
-      <Outlet />
+      <h1>App Component Goes Here</h1>
     </>
   );
 }
