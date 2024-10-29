@@ -7,7 +7,6 @@ function AppLayout() {
   return (
     <>
       <Navbar />
-      <h1>App Component</h1>
       <Footer />
       <Outlet />
     </>
