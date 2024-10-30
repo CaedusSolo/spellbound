@@ -2,7 +2,7 @@ import "./App.css";
 
 function Home() {
   return (
-    <div>
+    <div className="content-container">
       <h1 className="text-center">Welcome to Spellbound 🪄</h1>
     </div>
   );

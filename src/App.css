@@ -10,7 +10,7 @@
   margin: 0 auto;
   padding: 0;
   min-height: 100vh;
-  background-image: linear-gradient(rgba(4,9,28,0.6), rgba(4,9,28,0.9)), url('./assets/home-bg.jpg');
+  background-image: linear-gradient(rgba(42,9,8,0.8), rgba(42,9,8,0.9)), url('./assets/home-bg.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -20,13 +20,22 @@
 .container {
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 100vw;
   min-height: 100vh;
 }
 
+.btn {
+  display: block;
+  width: 30%;
+  margin: 0.5em auto;
+}
+
 .navbar {
   width: 100%;
-  max-height: 100px;
+  background-color: #2A1313;
 }
 
 .navbar .nav-link {
@@ -38,9 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: gainsboro;
   padding: 0.25em 0.5em;
-  color: #161616;
 }
 
 .nav-link.active {
@@ -48,26 +55,31 @@
 }
 
 .navbarLogo {
-  width: 8%;
-  height: 8%;
+  width: 8vw;
+  height: 9vh;
+}
+
+.contentContainer {
+  padding: 1em;
+}
+
+.sorting--hogwartsLogo  {
+  width: 30%;
+  height: 30%;
+  display: block;
+  margin: 0 auto;
+  max-height: 300px;
+  max-width: 300px;
 }
 
 .footer {
-  background-color: wheat;
+  background-color: #161616;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 10%; 
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 1em;
-}
-
-.footer > p {
-  color: #161616;
+  margin-top: auto;
 }
 
 .linksContainer {
