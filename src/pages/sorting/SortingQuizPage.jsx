@@ -1,9 +1,13 @@
-import React, { useState, useId } from "react";
+import React, { useState, createContext } from "react";
 import { questionItems, questionsMapping } from "./utils/questions";
 import SortingQuizQuestionItem from "./SortingQuizQuestionItem";
 
+export const SortingQuizContext = createContext();
+
 function SortingQuizPage() {
-  const [userResponses, setUserResponses] = useState([]);
+  const [userResponses, setUserResponses] = useState(
+    Array(questionItems.length).fill(null)
+  );
   const [scores, setScores] = useState({
     Gryffindor: 0,
     Slytherin: 0,
@@ -14,21 +18,39 @@ function SortingQuizPage() {
   function mapSortingQuestions() {
     return questionItems.map((question, index) => {
       return (
-        <SortingQuizQuestionItem 
-        question={question} 
-        questionIndex={index} 
-        key={index}
+        <SortingQuizQuestionItem
+          question={question}
+          questionIndex={index}
+          key={index}
+          onAnswerChange={handleAnswerChange}
         />
       );
     });
   }
 
+  function handleAnswerChange(questionIndex, answer) {
+    const currentResponses = [...userResponses];
+    console.log(currentResponses)
+    currentResponses[questionIndex] = answer;
+    setUserResponses(currentResponses);
+  }
+
   return (
     <div className="content-container">
-      <div className="sortingQuestionsContainer p-4 text-center">
-        {mapSortingQuestions()}
-      </div>
-      <button className="btn btn-secondary">Submit Answers!</button>
+      <SortingQuizContext.Provider value={{
+        userResponses,
+        scores
+      }}>
+        <div className="sortingQuestionsContainer p-4 text-center">
+          {mapSortingQuestions()}
+        </div>
+        <button
+          className="btn btn-primary"
+          disabled={userResponses.includes(null)}
+        >
+          Submit Answers!
+        </button>
+      </SortingQuizContext.Provider>
     </div>
   );
 }

@@ -95,6 +95,11 @@
   cursor: pointer;
 }
 
+.sortingOptionLabel.checked {
+  background-color: #0428B9;
+  font-weight: bold;
+}
+
 .footer {
   background-color: #161616;
   text-align: center;
