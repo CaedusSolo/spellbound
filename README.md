@@ -1,8 +1,8 @@
 # About This Project
 This project, which I have named 'Spellbound' for the time being, is an interactive web app based on the Harry Potter universe and Rowling's Wizarding World. 
 
-# TechStack
-The project will use React JS for the frontend and Express JS for the backend.
+# Tech Stack
+The project will use React JS for the frontend and Express JS for the backend. 
 
 # Features
 I've planned a few features for now (more to come!) , they are:
