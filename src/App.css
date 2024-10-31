@@ -44,11 +44,6 @@
   font-size: 1rem;
 }
 
-.navbar.sticky-top {
-  position: sticky;
-  top: 0;
-}
-
 .navbar,
 .linksContainer {
   display: flex;
@@ -93,6 +88,14 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
+.sortingOptionText {
+  display: inline-block;
+  margin: 0.25em;
+  text-align: center;
+  padding: 0.25em;
+}
+
 
 .sortingOptionInput {
   opacity: 0;

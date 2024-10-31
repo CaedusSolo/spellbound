@@ -11,7 +11,7 @@ function SortingQuizQuestionItem({ question, questionIndex, onAnswerChange }) {
       return (
         <React.Fragment key={optionValue}>
           {i === 0 && (
-            <p className="d-inline-block align-text-bottom mx-1">Disagree</p>
+            <p className="d-inline-block mx-1 sortingOptionText">Disagree</p>
           )}
           <input
             type="radio"
@@ -30,7 +30,7 @@ function SortingQuizQuestionItem({ question, questionIndex, onAnswerChange }) {
             {optionValue}
           </label>
           {i === 6 && (
-            <p className="d-inline-block align-text-bottom mx-1">Agree</p>
+            <p className="d-inline-block mx-1 sortingOptionText">Agree</p>
           )}
         </React.Fragment>
       );
@@ -40,7 +40,7 @@ function SortingQuizQuestionItem({ question, questionIndex, onAnswerChange }) {
   return (
     <div className="sortingQuestionItem mb-3">
       <h4 className="sortingQuestion fst-italic">{question}</h4>
-      <div className="sortingOptions">{mapOptions()}</div>
+      <div className="sortingOptions d-flex justify-content-center">{mapOptions()}</div>
     </div>
   );
 }

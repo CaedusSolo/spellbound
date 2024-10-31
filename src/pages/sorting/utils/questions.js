@@ -21,7 +21,7 @@ export const questionItems = [
   "I will stand up for what I believe is right, even if it causes a ruckus.",
 ];
 
-export const questionsMapping = {
+export const houseMapping = {
   0: "Gryffindor",
   1: "Ravenclaw",
   2: "Slytherin",
