@@ -36,8 +36,6 @@ function SortingQuizPage() {
 
   function handleSubmit() {
     const userHouse = getUserHouse()
-    
-
   }
 
   function getUserHouse() {
