@@ -5,21 +5,8 @@ function LoginPage() {
     <section className="content-container loginPage p-3">
       <h2 className="text-center">Log In</h2>
       <form action="post">
-        <div className="form-group w-75 d-block mx-auto">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter your email"
-          />
-        </div>
 
-        <div className="form-group mt-3 w-75 d-block mx-auto">
+        <div className="form-group mt-4 w-75 d-block mx-auto">
           <label htmlFor="username" className="form-label">
             Username
           </label>
@@ -33,7 +20,7 @@ function LoginPage() {
           />
         </div>
 
-        <div className="form-group mt-3 w-75 d-block mx-auto">
+        <div className="form-group mt-4 w-75 d-block mx-auto">
           <label htmlFor="password1" className="form-label">
             Enter Password
           </label>
@@ -46,6 +33,7 @@ function LoginPage() {
             placeholder="Enter password"
           />
         </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </section>
   );

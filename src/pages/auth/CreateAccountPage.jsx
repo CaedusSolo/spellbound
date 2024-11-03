@@ -21,7 +21,7 @@ function CreateAccountPage() {
 
         <div className="form-group mt-3 w-75 d-block mx-auto">
           <label htmlFor="username" className="form-label">
-            Username
+            Username (minimum 5 characters)
           </label>
           <input
             type="email"
@@ -30,6 +30,7 @@ function CreateAccountPage() {
             id="username"
             aria-describedby="usernameHelp"
             placeholder="Enter username"
+            minLength={5}
           />
         </div>
 
@@ -44,6 +45,7 @@ function CreateAccountPage() {
             id="password1"
             aria-describedby="password1Help"
             placeholder="Enter password"
+            minLength={8}
           />
         </div>
 
@@ -57,8 +59,10 @@ function CreateAccountPage() {
             id="password2"
             aria-describedby="password2Help"
             placeholder="Confirm password"
+            minLength={8}
           />
         </div>
+        <button type="submit" className="btn btn-primary mt-4">Submit</button>
       </form>
     </section>
   )
