@@ -1,10 +1,34 @@
-import React from 'react'
-
+import React, {useState} from 'react'
+import axios from 'axios'
 function CreateAccountPage() {
+
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password1: '',
+    password2: ''
+  })
+
+  function handleInputChange(e) {
+    setFormData({...formData, [e.target.name] : e.target.value})
+  }
+
+  async function handleFormSubmit(e) {
+    e.preventDefault()
+    
+    try {
+      const response = await axios.post('http://localhost:5000/auth/register', formData)
+      alert(response.data.message)
+    }
+    catch {
+      alert("Error")
+    }
+  }
+
   return (
     <section className="content-container createAccountPage p-3">
       <h2 className="text-center">Create Account</h2>
-      <form action="post">
+      <form onSubmit={handleFormSubmit}>
         <div className="form-group w-75 d-block mx-auto">
           <label htmlFor="email" className="form-label">
             Email address
@@ -16,6 +40,7 @@ function CreateAccountPage() {
             id="email"
             aria-describedby="emailHelp"
             placeholder="Enter your email"
+            onChange={handleInputChange}
           />
         </div>
 
@@ -24,13 +49,14 @@ function CreateAccountPage() {
             Username (minimum 5 characters)
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             name="username"
             id="username"
             aria-describedby="usernameHelp"
             placeholder="Enter username"
             minLength={5}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -46,6 +72,7 @@ function CreateAccountPage() {
             aria-describedby="password1Help"
             placeholder="Enter password"
             minLength={8}
+            onChange={handleInputChange}
           />
         </div>
 
@@ -60,6 +87,7 @@ function CreateAccountPage() {
             aria-describedby="password2Help"
             placeholder="Confirm password"
             minLength={8}
+            onChange={handleInputChange}
           />
         </div>
         <button type="submit" className="btn btn-primary mt-4">Submit</button>

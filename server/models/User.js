@@ -1,8 +1,8 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
-const UserSchema = new mongoose.Schema({
-    name: String,
+export const UserSchema = new mongoose.Schema({
     email: String,
+    username: String,
     password: String,
 })
 
