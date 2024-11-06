@@ -1,28 +1,67 @@
-import React, {useState} from 'react'
-import axios from 'axios'
-function CreateAccountPage() {
+import React, { useState } from "react";
+import axios from "axios";
+import validator from "validator";
 
+function CreateAccountPage() {
   const [formData, setFormData] = useState({
-    email: '',
-    username: '',
-    password1: '',
-    password2: ''
-  })
+    email: "",
+    username: "",
+    password1: "",
+    password2: "",
+  });
 
   function handleInputChange(e) {
-    setFormData({...formData, [e.target.name] : e.target.value})
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
   async function handleFormSubmit(e) {
-    e.preventDefault()
-    
-    try {
-      const response = await axios.post('http://localhost:5000/auth/register', formData)
-      alert(response.data.message)
+    e.preventDefault();
+
+    const formIsValid = validateForm();
+    console.log(formData)
+
+    if (formIsValid) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/auth/register",
+          {
+            email: formData.email,
+            username: formData.username,
+            password: formData.password1
+          }
+        );
+        alert(`TRY: ${response.data.message}`);
+      } catch (err) {
+        alert(`Error: ${err.response.data.message}`);
+      }
     }
-    catch {
-      alert("Error")
+    else {
+      alert("Invalid fields detected.")
     }
+  }
+
+  function validateForm() {
+    let emailIsValid = false;
+    let passwordIsValid = false;
+    let usernameIsValid = false;
+
+    if (formData.password1 === formData.password2) {
+      passwordIsValid = true;
+    }
+
+    if (formData.password1.length >= 8) {
+      passwordIsValid = true;
+    }
+
+    if (!formData.username.match(/[\<\>!@#\$%^&\*,]+/i)) {
+      usernameIsValid = true;
+    }
+
+    if (validator.isEmail(formData.email)) {
+      emailIsValid = true;
+    }
+
+    return emailIsValid && passwordIsValid && usernameIsValid;
   }
 
   return (
@@ -40,13 +79,14 @@ function CreateAccountPage() {
             id="email"
             aria-describedby="emailHelp"
             placeholder="Enter your email"
+            required
             onChange={handleInputChange}
           />
         </div>
 
         <div className="form-group mt-3 w-75 d-block mx-auto">
           <label htmlFor="username" className="form-label">
-            Username (minimum 5 characters)
+            Username (minimum 4 characters, only containing letters and _)
           </label>
           <input
             type="text"
@@ -55,8 +95,9 @@ function CreateAccountPage() {
             id="username"
             aria-describedby="usernameHelp"
             placeholder="Enter username"
-            minLength={5}
+            minLength={4}
             onChange={handleInputChange}
+            required
           />
         </div>
 
@@ -71,6 +112,7 @@ function CreateAccountPage() {
             id="password1"
             aria-describedby="password1Help"
             placeholder="Enter password"
+            required
             minLength={8}
             onChange={handleInputChange}
           />
@@ -78,22 +120,26 @@ function CreateAccountPage() {
 
         <div className="form-group mt-3 w-75 d-block mx-auto">
           <label htmlFor="password2" className="form-label">
-          Confirm Password</label>
+            Confirm Password
+          </label>
           <input
             type="password"
             className="form-control"
             name="password2"
             id="password2"
+            required
             aria-describedby="password2Help"
             placeholder="Confirm password"
             minLength={8}
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-4">Submit</button>
+        <button type="submit" className="btn btn-primary mt-4">
+          Submit
+        </button>
       </form>
     </section>
-  )
+  );
 }
 
-export default CreateAccountPage
+export default CreateAccountPage;
