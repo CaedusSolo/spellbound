@@ -1,17 +1,16 @@
-import { MongoClient } from "mongodb";
-import 'dotenv/config'
-
-let _db = null 
+import mongoose from "mongoose";
+import "dotenv/config";
+import {app, PORT} from "./server.js";
 
 async function connectToDatabase() {
-    if (!_db) {
-        const connectionString = process.env.MONGO_URI
-        const databaseName = process.env.DB_NAME
-        const client = await MongoClient.connect(connectionString)
-        _db = client.db(databaseName)
-    }
-    return _db
+  const connectionString = process.env.MONGO_URI;
+  const con = await mongoose
+    .connect(connectionString)
+    .then(() => {
+      console.log("Connected to mongoose");
+      app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+    })
+    .catch((err) => console.log(err));
 }
 
-
-export {connectToDatabase}
+export { connectToDatabase };
