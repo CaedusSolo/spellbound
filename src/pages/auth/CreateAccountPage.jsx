@@ -33,7 +33,7 @@ function CreateAccountPage() {
         alert("Successfully created account!");
         setFormData(initialFormData);
       } catch (err) {
-        alert(`Error: ${err.response.data.message}`);
+        alert(`Error: ${err.response.data.error}`);
       }
     } else {
       alert("Invalid fields detected.");
