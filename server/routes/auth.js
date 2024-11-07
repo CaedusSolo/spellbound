@@ -2,20 +2,28 @@ import express from "express";
 import User from "../models/User.js";
 import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
+
 const router = express.Router();
 
 async function hashPassword(password) {
   const salt = await bcrypt.genSalt(11);
-
   const hashedPassword = await bcrypt.hash(password, salt);
-
   return hashedPassword;
 }
 
 router.post("/register", async (req, res) => {
-  console.log("Received request at /auth/register");
   try {
-    const hashedPassword = hashPassword(req.body.password);
+    const userInDB = await User.findOne({
+      $or: [{ username: req.body.username }, { email: req.body.email }],
+    });
+
+    if (userInDB) {
+      return res.status(409).json({
+        error: "Username or username already exists.",
+      });
+    }
+
+    const hashedPassword = await hashPassword(req.body.password);
 
     const newUser = await User.create({
       email: req.body.email,
