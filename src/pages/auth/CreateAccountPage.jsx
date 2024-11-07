@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import validator from "validator";
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function CreateAccountPage() {
+  const siteKey = import.meta.env.VITE_SITE_KEY
   const initialFormData = {
     email: "",
     username: "",
@@ -137,9 +139,10 @@ function CreateAccountPage() {
             value={formData.password2}
           />
         </div>
-        <button type="submit" className="btn btn-primary mt-4">
+        <button type="submit" className="btn btn-primary mt-4 mb-4">
           Submit
         </button>
+        <ReCAPTCHA sitekey={siteKey} className="d-flex  align-items-center justify-content-center" />
       </form>
     </section>
   );
