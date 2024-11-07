@@ -3,12 +3,13 @@ import axios from "axios";
 import validator from "validator";
 
 function CreateAccountPage() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     email: "",
     username: "",
     password1: "",
     password2: "",
-  });
+  };
+  const [formData, setFormData] = useState(initialFormData);
 
   function handleInputChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +19,6 @@ function CreateAccountPage() {
     e.preventDefault();
 
     const formIsValid = validateForm();
-    console.log(formData)
 
     if (formIsValid) {
       try {
@@ -27,16 +27,16 @@ function CreateAccountPage() {
           {
             email: formData.email,
             username: formData.username,
-            password: formData.password1
+            password: formData.password1,
           }
         );
-        alert(`TRY: ${response.data.message}`);
+        alert("Successfully created account!");
+        setFormData(initialFormData);
       } catch (err) {
         alert(`Error: ${err.response.data.message}`);
       }
-    }
-    else {
-      alert("Invalid fields detected.")
+    } else {
+      alert("Invalid fields detected.");
     }
   }
 
@@ -45,11 +45,10 @@ function CreateAccountPage() {
     let passwordIsValid = false;
     let usernameIsValid = false;
 
-    if (formData.password1 === formData.password2) {
-      passwordIsValid = true;
-    }
-
-    if (formData.password1.length >= 8) {
+    if (
+      formData.password1 === formData.password2 &&
+      formData.password1.length >= 8
+    ) {
       passwordIsValid = true;
     }
 
@@ -79,6 +78,7 @@ function CreateAccountPage() {
             id="email"
             aria-describedby="emailHelp"
             placeholder="Enter your email"
+            value={formData.email}
             required
             onChange={handleInputChange}
           />
@@ -86,7 +86,7 @@ function CreateAccountPage() {
 
         <div className="form-group mt-3 w-75 d-block mx-auto">
           <label htmlFor="username" className="form-label">
-            Username (minimum 4 characters, only containing letters and _)
+            Username ( minimum 4 characters, only containing letters and _ )
           </label>
           <input
             type="text"
@@ -96,6 +96,7 @@ function CreateAccountPage() {
             aria-describedby="usernameHelp"
             placeholder="Enter username"
             minLength={4}
+            value={formData.username}
             onChange={handleInputChange}
             required
           />
@@ -115,6 +116,7 @@ function CreateAccountPage() {
             required
             minLength={8}
             onChange={handleInputChange}
+            value={formData.password1}
           />
         </div>
 
@@ -132,6 +134,7 @@ function CreateAccountPage() {
             placeholder="Confirm password"
             minLength={8}
             onChange={handleInputChange}
+            value={formData.password2}
           />
         </div>
         <button type="submit" className="btn btn-primary mt-4">

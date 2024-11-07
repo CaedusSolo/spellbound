@@ -1,16 +1,26 @@
 import express from "express";
 import User from "../models/User.js";
 import { nanoid } from "nanoid";
+import bcrypt from "bcrypt";
 const router = express.Router();
+
+async function hashPassword(password) {
+  const salt = await bcrypt.genSalt(11);
+
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  return hashedPassword;
+}
 
 router.post("/register", async (req, res) => {
   console.log("Received request at /auth/register");
   try {
-    console.log("Trying to create new User....");
+    const hashedPassword = hashPassword(req.body.password);
+
     const newUser = await User.create({
       email: req.body.email,
       username: req.body.username,
-      password: req.body.password,
+      password: hashedPassword,
       id: nanoid(),
     });
     res
