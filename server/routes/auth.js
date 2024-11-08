@@ -2,6 +2,12 @@ import express from "express";
 import User from "../models/User.js";
 import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
+import dotenv from 'dotenv'
+import axios from "axios";
+
+dotenv.config({
+  path: "../../../.env"
+})
 
 const router = express.Router();
 
@@ -62,5 +68,13 @@ router.post("/login", async (req, res) => {
     });
   }
 });
+
+router.post('/verify_recaptcha', async (req, res) => {
+  const {captchaValue} = req.body
+  const {data} = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.VITE_SECRET_KEY}&response=${captchaValue}`
+  )
+  response.send(data)
+})
 
 export default router;

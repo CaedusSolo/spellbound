@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import validator from "validator";
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA from "react-google-recaptcha";
 
 function CreateAccountPage() {
-  const siteKey = import.meta.env.VITE_SITE_KEY
+  const siteKey = import.meta.env.VITE_SITE_KEY;
   const initialFormData = {
     email: "",
     username: "",
     password1: "",
     password2: "",
   };
+  const recaptchaRef = useRef();
   const [formData, setFormData] = useState(initialFormData);
 
   function handleInputChange(e) {
@@ -34,6 +35,7 @@ function CreateAccountPage() {
         );
         alert("Successfully created account!");
         setFormData(initialFormData);
+        recaptchaRef.current.value = null
       } catch (err) {
         alert(`Error: ${err.response.data.error}`);
       }
@@ -43,6 +45,7 @@ function CreateAccountPage() {
   }
 
   function validateForm() {
+    let recaptchaIsValid = false;
     let emailIsValid = false;
     let passwordIsValid = false;
     let usernameIsValid = false;
@@ -62,7 +65,33 @@ function CreateAccountPage() {
       emailIsValid = true;
     }
 
-    return emailIsValid && passwordIsValid && usernameIsValid;
+    if (recaptchaRef.current.getValue()) {
+      const validity = validateReCAPTCHA()
+      if (validity) {
+        recaptchaIsValid = true;
+      }
+    }
+
+    return recaptchaIsValid && emailIsValid && passwordIsValid && usernameIsValid;
+  }
+
+  async function validateReCAPTCHA() {
+    const res = await fetch("http://localhost:5000/auth/verify_recaptcha",
+      {
+        method: 'POST',
+        body: JSON.stringify({captchaValue}),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }
+    )
+    const data = await res.json()
+    if (data.success) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   return (
@@ -142,7 +171,11 @@ function CreateAccountPage() {
         <button type="submit" className="btn btn-primary mt-4 mb-4">
           Submit
         </button>
-        <ReCAPTCHA sitekey={siteKey} className="d-flex  align-items-center justify-content-center" />
+        <ReCAPTCHA
+          sitekey={siteKey}
+          ref={recaptchaRef}
+          className="d-flex  align-items-center justify-content-center"
+        />
       </form>
     </section>
   );
