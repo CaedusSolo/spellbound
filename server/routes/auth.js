@@ -7,9 +7,10 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import { authenticateToken } from "../server.js";
 
-dotenv.config({
-  path: "../../../.env",
-});
+dotenv.config()
+console.log(process.env.ACCESS_TOKEN_SECRET)
+console.log(process.env.VITE_SECRET_KEY)
+console.log(process.env.MONGO_URI)
 
 const router = express.Router();
 
@@ -18,7 +19,6 @@ async function hashPassword(password) {
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
 }
-
 
 router.post("/register", async (req, res) => {
   try {
@@ -86,5 +86,13 @@ router.post("/verify_recaptcha", async (req, res) => {
   );
   response.send(data);
 });
+
+
+router.post("/verify_token", authenticateToken, (req, res) => {
+  res.status(200).json({
+    message: "Valid token",
+    user: req.user
+  })
+})
 
 export default router;

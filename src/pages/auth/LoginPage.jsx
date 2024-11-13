@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../../AuthProvider";
 
 function LoginPage() {
+  const { authState } = useContext(AuthContext);
+
   const initialFormData = {
     username: "",
     password: "",
@@ -15,20 +18,17 @@ function LoginPage() {
   async function handleFormSubmit(e) {
     e.preventDefault();
 
-    console.log("Form submitted!")
+    console.log("Form submitted!");
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/auth/login",
-        {
-          username: formData.username,
-          password: formData.password
-        }
-      );
-      
-      alert(`Message: ${response.data.message}`)
+      const response = await axios.post("http://localhost:5000/auth/login", {
+        username: formData.username,
+        password: formData.password,
+      });
+      localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+      alert(`Message: ${response.data.message}`);
     } catch (err) {
-      alert(`Error: ${err.response.data.error}`);
+      alert(`Error: ${err.data.error}`);
     }
   }
 
