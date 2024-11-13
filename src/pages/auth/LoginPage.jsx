@@ -25,6 +25,7 @@ function LoginPage() {
           password: formData.password
         }
       );
+      
       alert(`Message: ${response.data.message}`)
     } catch (err) {
       alert(`Error: ${err.response.data.error}`);

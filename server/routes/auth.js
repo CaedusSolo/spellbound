@@ -2,12 +2,14 @@ import express from "express";
 import User from "../models/User.js";
 import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 import axios from "axios";
+import jwt from "jsonwebtoken";
+import { authenticateToken } from "../server.js";
 
 dotenv.config({
-  path: "../../../.env"
-})
+  path: "../../../.env",
+});
 
 const router = express.Router();
 
@@ -16,6 +18,7 @@ async function hashPassword(password) {
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
 }
+
 
 router.post("/register", async (req, res) => {
   try {
@@ -57,7 +60,14 @@ router.post("/login", async (req, res) => {
 
     bcrypt.compare(req.body.password, user.password, (err, result) => {
       if (result) {
-        return res.status(200).json({ message: "Logged In Successfully." });
+        const authenticatedUser = { username: req.body.username };
+        const accessToken = jwt.sign(
+          authenticatedUser,
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: "1d" }
+        );
+
+        return res.status(200).json({ accessToken: accessToken, message: "Logged In!" });
       }
 
       return res.status(401).json({ error: "Passwords do not match." });
@@ -69,12 +79,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post('/verify_recaptcha', async (req, res) => {
-  const {captchaValue} = req.body
-  const {data} = await axios.post(
+router.post("/verify_recaptcha", async (req, res) => {
+  const { captchaValue } = req.body;
+  const { data } = await axios.post(
     `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.VITE_SECRET_KEY}&response=${captchaValue}`
-  )
-  response.send(data)
-})
+  );
+  response.send(data);
+});
 
 export default router;
