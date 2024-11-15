@@ -8,9 +8,6 @@ import jwt from "jsonwebtoken";
 import { authenticateToken } from "../server.js";
 
 dotenv.config()
-console.log(process.env.ACCESS_TOKEN_SECRET)
-console.log(process.env.VITE_SECRET_KEY)
-console.log(process.env.MONGO_URI)
 
 const router = express.Router();
 
@@ -89,7 +86,7 @@ router.post("/verify_recaptcha", async (req, res) => {
 
 
 router.post("/verify_token", authenticateToken, (req, res) => {
-  res.status(200).json({
+  return res.status(200).json({
     message: "Valid token",
     user: req.user
   })

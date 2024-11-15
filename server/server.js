@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
 import { connectToDatabase } from "./database.js";
+import jwt from "jsonwebtoken"
 
 const app = express();
 const PORT = 5000;
@@ -13,8 +14,11 @@ connectToDatabase();
 app.use("/auth", authRouter);
 
 function authenticateToken(req, res, next) {
+  console.log("Authenticating token...")
   const authHeader = req.headers["authorization"];
+  console.log(authHeader)
   const token = authHeader && authHeader.split(" ")[1];
+  console.log(token)
 
   if (token == null) return res.sendStatus(401);
 
