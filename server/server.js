@@ -14,11 +14,8 @@ connectToDatabase();
 app.use("/auth", authRouter);
 
 function authenticateToken(req, res, next) {
-  console.log("Authenticating token...")
   const authHeader = req.headers["authorization"];
-  console.log(authHeader)
   const token = authHeader && authHeader.split(" ")[1];
-  console.log(token)
 
   if (token == null) return res.sendStatus(401);
 

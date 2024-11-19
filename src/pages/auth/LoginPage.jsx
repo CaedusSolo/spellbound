@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../../AuthProvider";
 
 function LoginPage() {
-  const { authState } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const initialFormData = {
     username: "",
@@ -17,7 +17,6 @@ function LoginPage() {
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-
     console.log("Form submitted!");
 
     try {
@@ -25,7 +24,9 @@ function LoginPage() {
         username: formData.username,
         password: formData.password,
       });
-      localStorage.setItem("token", JSON.stringify(response.data.accessToken));
+      login(response.data.accessToken, formData.username);
+      setFormData(initialFormData);
+
       alert(`Message: ${response.data.message}`);
     } catch (err) {
       alert(`Error: ${err.data.error}`);

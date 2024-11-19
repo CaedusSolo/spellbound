@@ -38,12 +38,11 @@ function AuthProvider({ children }) {
               isAuthenticated: true,
             });
           } else {
-            localStorage.removeItem("token"); // Optionally handle invalid token
+            localStorage.removeItem("token");
           }
         } catch (err) {
           console.error("Failed to authenticate token.", err);
         } finally {
-          // Reset the flag once verification is done
           setIsVerifying(false);
         }
       })();
@@ -51,9 +50,18 @@ function AuthProvider({ children }) {
     // Only run this effect on initial mount and when `token` is found
   }, []); 
   
+  function login(token, username) {
+    localStorage.setItem("token", JSON.stringify(token))
+    setAuthState({
+      token: token,
+      isAuthenticated: true,
+      username: username
+    });
+    console.log(`${username} is logged in!`)
+  }
 
   return (
-    <AuthContext.Provider value={{ authState }}>
+    <AuthContext.Provider value={{ authState, login }}>
       {children}
     </AuthContext.Provider>
   );
