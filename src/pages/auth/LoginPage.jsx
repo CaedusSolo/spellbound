@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../AuthProvider";
 
 function LoginPage() {
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate() 
 
   const initialFormData = {
     username: "",
@@ -28,6 +30,8 @@ function LoginPage() {
       setFormData(initialFormData);
 
       alert(`Message: ${response.data.message}`);
+      navigate("/")
+
     } catch (err) {
       alert(`Error: ${err.data.error}`);
     }

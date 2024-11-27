@@ -65,8 +65,17 @@ function AuthProvider({ children }) {
     console.log(`${username} is logged in!`)
   }
 
+  function logout() {
+    localStorage.clear()
+    setAuthState({
+      token: null,
+      isAuthenticated: false,
+      username: null
+    })
+  }
+
   return (
-    <AuthContext.Provider value={{ authState, login, isLoading }}>
+    <AuthContext.Provider value={{ authState, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
