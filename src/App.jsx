@@ -9,6 +9,7 @@ import CreateAccountPage from "./pages/auth/CreateAccountPage.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider.jsx";
 import { FidgetSpinner } from "react-loader-spinner";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
   const { authState, isLoading } = useContext(AuthContext);
@@ -33,11 +34,19 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<Home />} />
           <Route path="sorting">
             <Route index element={<SortingHomePage />} />
-            <Route path="quiz" element={<SortingQuizPage />} />
+            <Route
+              path="quiz"
+              element={
+                <ProtectedRoute>
+                  <SortingQuizPage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
+
+          <Route index element={<Home />} />
           <Route path="auth" element={<AuthLayout />}>
             {authState.isAuthenticated && <Route path="logout" />}
             <Route path="login" element={<LoginPage />} />
