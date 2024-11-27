@@ -9,6 +9,7 @@ function AuthProvider({ children }) {
     isAuthenticated: false,
   });
   const [isVerifying, setIsVerifying] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   async function verifyToken(token) {
     const response = await fetch("http://localhost:5000/auth/verify_token", {
@@ -44,8 +45,12 @@ function AuthProvider({ children }) {
           console.error("Failed to authenticate token.", err);
         } finally {
           setIsVerifying(false);
+          setIsLoading(false);
         }
       })();
+    }
+    else {
+      setIsLoading(false)
     }
     // Only run this effect on initial mount and when `token` is found
   }, []); 
@@ -61,7 +66,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ authState, login }}>
+    <AuthContext.Provider value={{ authState, login, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
