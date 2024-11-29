@@ -1,10 +1,13 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { questionItems, houseMapping } from "./utils/questions";
 import SortingQuizQuestionItem from "./SortingQuizQuestionItem";
+import axios from "axios";
+import { AuthContext } from "../../AuthProvider";
 
 export const SortingQuizContext = createContext();
 
 function SortingQuizPage() {
+  const { authState } = useContext(AuthContext)
   const [userResponses, setUserResponses] = useState(
     Array(questionItems.length).fill(null)
   );
@@ -36,6 +39,11 @@ function SortingQuizPage() {
 
   function handleSubmit() {
     const userHouse = getUserHouse()
+    const response = axios.post("http://localhost:5000/sorting/set_house", {
+      username: authState.username,
+      house: userHouse
+    })
+    console.log(response)
   }
 
   function getUserHouse() {

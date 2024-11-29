@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRouter from "./routes/auth.js";
+import sortingRouter from "./routes/sorting.js"
 import { connectToDatabase } from "./database.js";
 import jwt from "jsonwebtoken"
 
@@ -12,6 +13,7 @@ app.use(cors());
 
 connectToDatabase();
 app.use("/auth", authRouter);
+app.use("/sorting", sortingRouter)
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
