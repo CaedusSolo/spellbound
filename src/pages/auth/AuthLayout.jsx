@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider";
+import { useAuth } from "../../AuthProvider";
 
 function AuthLayout() {
-  const { authState, isLoading } = useContext(AuthContext);
+  const { authState } = useAuth();
   return (
     <div className="content-container authLayout">
       <nav className="navbar bg-black">

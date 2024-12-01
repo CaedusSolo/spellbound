@@ -2,12 +2,16 @@ import React, { useState, createContext, useContext } from "react";
 import { questionItems, houseMapping } from "./utils/questions";
 import SortingQuizQuestionItem from "./SortingQuizQuestionItem";
 import axios from "axios";
-import { AuthContext } from "../../AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthProvider";
+import { useUser } from "../../UserProvider";
 
 export const SortingQuizContext = createContext();
 
 function SortingQuizPage() {
-  const { authState } = useContext(AuthContext)
+  const { authState } = useAuth();
+  const { updateUserInfo } = useUser();
+  const { navigate } = useNavigate();
   const [userResponses, setUserResponses] = useState(
     Array(questionItems.length).fill(null)
   );
@@ -38,12 +42,18 @@ function SortingQuizPage() {
   }
 
   function handleSubmit() {
-    const userHouse = getUserHouse()
+    const userHouse = getUserHouse();
     const response = axios.post("http://localhost:5000/sorting/set_house", {
       username: authState.username,
-      house: userHouse
-    })
-    console.log(response)
+      house: userHouse,
+    });
+    if (response) {
+      handleSortingComplete(userHouse);
+    }
+  }
+
+  function handleSortingComplete(house) {
+    updateUserInfo({ house });
   }
 
   function getUserHouse() {
@@ -68,7 +78,7 @@ function SortingQuizPage() {
       (house) => housePercentages[house] === highestPercentage
     );
 
-    return userHouse
+    return userHouse;
   }
 
   return (
