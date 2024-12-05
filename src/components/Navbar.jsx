@@ -48,8 +48,9 @@ function Navbar() {
           className={({ isActive }) =>
             isActive ? `nav-link active` : "nav-link"
           }
+          to="profile"
         >
-          Learn
+          Profile
         </NavLink>
       </div>
     </nav>

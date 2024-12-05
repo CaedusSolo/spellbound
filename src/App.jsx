@@ -9,6 +9,7 @@ import CreateAccountPage from "./pages/auth/CreateAccountPage.jsx";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider.jsx";
 import { FidgetSpinner } from "react-loader-spinner";
+import ProfileHomePage from "./pages/profile/ProfileHomePage.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
             {authState.isAuthenticated && <Route path="logout" />}
             <Route path="login" element={<LoginPage />} />
             <Route path="create-account" element={<CreateAccountPage />} />
+          </Route>
+
+          <Route path="profile">
+            <Route index element={<ProfileHomePage />} />
           </Route>
         </Route>
       </Routes>

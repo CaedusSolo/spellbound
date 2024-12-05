@@ -11,7 +11,7 @@ export const SortingQuizContext = createContext();
 function SortingQuizPage() {
   const { authState } = useAuth();
   const { updateUserInfo } = useUser();
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
   const [userResponses, setUserResponses] = useState(
     Array(questionItems.length).fill(null)
   );
@@ -54,6 +54,7 @@ function SortingQuizPage() {
 
   function handleSortingComplete(house) {
     updateUserInfo({ house });
+    navigate('/profile')
   }
 
   function getUserHouse() {
