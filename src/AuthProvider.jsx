@@ -1,15 +1,15 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-
+import { useUser } from "./UserProvider";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [authState, setAuthState] = useState({
-    username: null,
     token: null,
     isAuthenticated: false,
   });
   const [isVerifying, setIsVerifying] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const { updateUserInfo } = useUser()
 
   async function verifyToken(token) {
     const response = await fetch("http://localhost:5000/auth/verify_token", {
@@ -60,8 +60,8 @@ function AuthProvider({ children }) {
     setAuthState({
       token: token,
       isAuthenticated: true,
-      username: username
     });
+    updateUserInfo({ username })
     console.log(`${username} is logged in!`)
   }
 

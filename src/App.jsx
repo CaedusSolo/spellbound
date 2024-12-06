@@ -55,7 +55,14 @@ function App() {
           </Route>
 
           <Route path="profile">
-            <Route index element={<ProfileHomePage />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <ProfileHomePage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
         </Route>
       </Routes>

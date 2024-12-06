@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import validator from "validator";
+import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
 function CreateAccountPage() {
   const siteKey = import.meta.env.VITE_SITE_KEY;
+  const navigate = useNavigate()
   const initialFormData = {
     email: "",
     username: "",
@@ -36,6 +38,7 @@ function CreateAccountPage() {
         alert("Successfully created account!");
         setFormData(initialFormData);
         recaptchaRef.current.value = null
+        navigate("/auth/login")
       } catch (err) {
         alert(`Error: ${err.response.data.error}`);
       }

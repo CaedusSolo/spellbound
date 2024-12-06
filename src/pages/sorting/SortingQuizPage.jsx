@@ -10,7 +10,7 @@ export const SortingQuizContext = createContext();
 
 function SortingQuizPage() {
   const { authState } = useAuth();
-  const { updateUserInfo } = useUser();
+  const { userInfo, updateUserInfo } = useUser();
   const navigate = useNavigate();
   const [userResponses, setUserResponses] = useState(
     Array(questionItems.length).fill(null)
@@ -44,7 +44,7 @@ function SortingQuizPage() {
   function handleSubmit() {
     const userHouse = getUserHouse();
     const response = axios.post("http://localhost:5000/sorting/set_house", {
-      username: authState.username,
+      username: userInfo.username,
       house: userHouse,
     });
     if (response) {

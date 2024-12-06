@@ -6,7 +6,7 @@ export function UserProvider({ children }) {
 
   const [userInfo, setUserInfo] = useState(() => {
     const savedUserInfo = localStorage.getItem('userInfo')
-    return savedUserInfo ? JSON.parse(savedUserInfo) : {house: null}
+    return savedUserInfo ? JSON.parse(savedUserInfo) : {house: null, username: null}
   });
 
   const updateUserInfo = (info) => {

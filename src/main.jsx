@@ -6,10 +6,10 @@ import { UserProvider } from "./UserProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <UserProvider>
+    <UserProvider>
+      <AuthProvider>
         <App />
-      </UserProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </UserProvider>
   </StrictMode>
 );
