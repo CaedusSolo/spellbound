@@ -9,7 +9,7 @@ function SortingHomePage() {
       <img
         src={HogwartsLogo}
         alt="Hogwarts Logo"
-        className="sorting--hogwartsLogo"
+        className="sorting--hogwartsLogo d-block mx-auto"
       />
       <button className="btn btn-primary text-center">
         <Link className="link-light text-decoration-none" to="quiz" >Take the Sorting Quiz</Link>

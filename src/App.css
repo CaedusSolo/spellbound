@@ -58,8 +58,8 @@
 }
 
 .navbarLogo {
-  width: 8vw;
-  height: 9vh;
+  width: 7.5vw;
+  height: 8vh;
 }
 
 .contentContainer {
@@ -75,8 +75,6 @@
 .sorting--hogwartsLogo {
   width: 30%;
   height: 30%;
-  display: block;
-  margin: 0 auto;
   max-height: 300px;
   max-width: 300px;
 }
@@ -112,6 +110,11 @@
 .sortingOptionLabel.checked {
   background-color: #0428b9;
   font-weight: bold;
+}
+
+.profile--houseCrest {
+  width: 10%;
+  height: 10%;
 }
 
 .footer {
